@@ -23,7 +23,7 @@
         "tailwindcss": "npx tailwindcss -i ./views/css/tailwind.css -o ./views/css/style.css --watch"
     },
     "engines": {
-        "node": "17.4.0"
+        "node": "^17.x"
     },
     "dependencies": {
         "@discordjs/builders": "^0.12.0",
