@@ -39,6 +39,5 @@ module.exports = async function video(req, res, next) {
             url: pSelect.url,
         }
     }
-    console.log(findvideo.related_videos[0])
     return res.render('video', { search: params.search, video, videos: null, related: findvideo.related_videos })
 }
