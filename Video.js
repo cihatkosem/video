@@ -31,7 +31,6 @@ module.exports = async function video(req, res, next) {
             isLiveContent: details.isLiveContent
         },
         player: {
-            qualityLabel: pSelect.qualityLabel,
             hasVideo: pSelect.hasVideo,
             hasAudio: pSelect.hasAudio,
             container: pSelect.container,
