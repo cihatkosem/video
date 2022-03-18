@@ -1,0 +1,31 @@
+<script>
+    function darkMode() {
+        if (localStorage.theme == 'dark') {
+            document.documentElement.classList.remove('dark')
+            localStorage.theme = 'light'
+        } else {
+            document.documentElement.classList.add('dark')
+            localStorage.theme = 'dark'
+        }
+    }
+</script>
+
+<script>
+    let all_mounts = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    let mounts = all_mounts[new Date().getMonth()]
+    let winter_months = ["1", "2", "3", "10", "11", "12"]
+    let winter_hours = ["10", "11", "12", "13", "14", "15", "16"]
+    let normal_hours = ["10", "11", "12", "13", "14", "15", "16", "17", "18"]
+    let time = winter_months.includes(mounts) ? winter_hours : normal_hours
+
+    if (time.includes(`${new Date().getHours()}`)) {
+        localStorage.theme = 'light'
+        document.documentElement.classList.remove('dark')
+    } else {
+        localStorage.theme = 'dark'
+        document.documentElement.classList.add('dark')
+    }
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script defer src="https://unpkg.com/alpinejs@3.7.0/dist/cdn.min.js"></script>
