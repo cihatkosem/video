@@ -143,7 +143,7 @@
                                 <% if (related) { %>
                                     <div class="flex flex-wrap mb-4">
                                         <% related.slice(1,6).map(v => { %> 
-                                            <div onclick="location.href='/video/izle/<%= v.videoId %>'" class="flex-1 m-2 cursor-pointer">
+                                            <div onclick="location.href='/video/izle/<%= v.id %>'" class="flex-1 m-2 cursor-pointer">
                                                 <div>
                                                     <img src="<%= v.thumbnails[v.thumbnails.length - 1].url %>">
                                                 </div>
