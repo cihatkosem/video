@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="tr">
+    <head>
+        <%- include('./section/head') -%>
+    </head>
+    <body class="bg-white flex flex-col text-black dark:text-white dark:bg-black select-none overflow-y overflow-x-hidden">
+        <main class="transition ease-in z-0 h-screen w-screen flex">
+            <%- include('./section/navbar') -%>
+            <section class="flex-auto p-6 pt-16">
+                <div class="container mx-auto flex">
+                    <div class="w-full mx-16 py-3">
+                        <div>
+                            <% if (video) { %>
+                                <%- include('./pages/video.ejs') -%>
+                            <% } %>
+                            <% if (videos) { %>
+                                <%- include('./pages/videos.ejs') -%>
+                            <% } %>
+                            <% if (!video && !videos) { %>
+                                <%- include('./pages/home.ejs') -%>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+                <%- include('./section/footer') -%>
+            </section>
+        </main>
+        <%- include('./section/system') -%>
+    </body>
+</html>

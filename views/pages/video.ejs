@@ -1,0 +1,59 @@
+
+<form method="POST">
+    <div class="flex px-4 w-full">
+        <input id="videoname" name="videoname" type="text"
+            class="grow p-2 mx-1 bg-gray-200 focus:outline-none bg-gray-100 block py-2 px-4 rounded-lg text-black"
+            placeholder="Video Ara!" aria-describedby= "help" autocomplete= "off" autofocus required />
+        <button type="submit"
+            class="w-16 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider block rounded-lg hover:bg-purple-700">
+            <i class="far fa-search"></i>
+        </button>
+    </div>
+</form>
+<div class="grid grid-cols-2 gap-3 pt-4">
+    <div class="rounded-xl left-0" id="player"></div>
+    <script>
+        var tag = document.createElement('script')
+        tag.src = "https://www.youtube.com/iframe_api"
+
+        var firstScriptTag = document.getElementsByTagName('script')[0]
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '324',
+                width: '576',
+                videoId: '<%= video.videoId %>',
+                playerVars: {
+                    'playsinline': 1
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                }
+            })
+        }
+
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+
+        function stopVideo() {
+            player.stopVideo();
+        }
+    </script>
+    <% if (related) { %>
+        <div class="grid grid-cols-2 gap-2 right-0">
+            <% related.slice(0,4).map(v => { %> 
+                <div onclick="location.href='/video/izle/<%= v.id %>'"
+                    class="flex items-center justify-center flex-col bg-red-200 dark:bg-red-800 p-2 rounded-lg cursor-pointer">
+                    <img class="rounded-md shadow-sm w-3/4" src="<%= v.thumbnails[v.thumbnails.length - 1].url %>" alt="<%= v.id %>" />
+                    <p class="pt-2 text-sm font-medium"><%= v.title.slice(0,25) %><%= v.title.slice(25,26) ? "..." : "" %> </p>
+                    <p class="pt-1 font-hairline text-xs text-grey-darker">
+                        <%= v.view_count %> kez görüntülendi.
+                    </p>
+                </div>
+            <% }) %> 
+        </div>
+    <% } %>
+</div>
