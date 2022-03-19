@@ -11,7 +11,6 @@ module.exports = async function index(req, res, next) {
     let mp4 = formats ? formats.filter(f => f.container == "mp4" && f.hasAudio == true && f.hasVideo == true) : null
     let mp3 = formats ? formats.filter(f => f.container == "webm" && f.mimeType == `audio/webm; codecs="opus"`) : null
 
-    console.log(mp3)
     let details = findvideo.player_response.videoDetails
     let video = {
         title: details.title,
