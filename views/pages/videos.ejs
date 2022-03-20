@@ -1,34 +1,52 @@
-<div class="flex items-center justify-center">
-    <div>
-        <div class="mb-4">
-            Arama Sonuçları Listelendi!
-            <span class="ml-3 text-grey-dark">"<%= search %>"</span>
-        </div>
-        <form method="POST">
-            <div class="flex p-4 w-full">
-                <input id="videoname" name="videoname" type="text"
-                    class="grow p-2 mx-1 bg-gray-200 focus:outline-none bg-gray-100 block py-2 px-4 rounded-lg text-black"
-                    placeholder="Video Ara!" aria-describedby= "help" autocomplete= "off" autofocus required />
-                <button type="submit"
-                    class="w-16 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider block rounded-lg hover:bg-purple-700">
-                    <i class="far fa-search"></i>
-                </button>
-            </div>
-        </form>
-        <div class="grid grid-cols-5 gap-3">
-            <% videos.slice(0,15).map(v => { %> 
-                <div onclick="location.href='/video/izle/<%= v.videoId %>'"
-                    class="flex items-center justify-center flex-col bg-red-200 dark:bg-red-800 p-2 rounded-lg cursor-pointer">
-                    <img class="rounded-md shadow-sm w-17/20 max-h-1/2" src="<%= v.thumbnail %>" alt="<%= v.videoId %>" />
-                    <h4 class="pt-2  text-sm font-medium"><%= v.title.slice(0,25) %><%= v.title.slice(25,26) ? "..." : "" %> </h4>
-                    <p class="pt-2 font-hairline text-sm text-grey-darker">
-                        <%= v.author.name.slice(0,30) %> <%=  v.author.name.slice(30,31) ? "..." : "" %>
-                    </p>
-                    <p class="pt-1 font-hairline text-xs text-grey-darker">
-                        <%= v.views %> kez görüntülendi.
-                    </p>
-                </div>
-            <% }) %> 
-        </div>
+<form method="POST">
+    <div class="flex pt-4 px-4 w-full">
+        <input id="videoname" name="videoname" type="text"
+            class="grow p-2 mx-1 bg-gray-200 focus:outline-none bg-gray-100 text-black block py-2 px-4 rounded-lg"
+            placeholder="Video Ara!" aria-describedby= "help" autocomplete= "off" autofocus required />
+        <button type="submit"
+            class="w-16 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider block rounded-lg hover:bg-purple-700">
+            <i class="far fa-search"></i>
+        </button>
     </div>
+</form>
+<div class="mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+    <% videos.slice(0,15).map(v => { %> 
+        <div onclick="location.href='/video/izle/<%= v.videoId %>'" class="rounded-lg cursor-pointer">
+            <div class="flex items-center">
+                <div class="flex-shrink-0 bg-gray-200 dark:bg-gray-900 dark:bg-opacity-20 shadow-2xl max-w-md mx-auto rounded-xl overflow-hidden md:max-w-2xl">
+                    <div class="md:flex">
+                        <div class="md:shrink-0">
+                            <img class="h-48 w-full object-cover md:h-full md:w-40" src="<%= v.thumbnail %>">
+                        </div>
+                        <div class="p-4">
+                            <div class="inline md:hidden xl:hidden">
+                                <div class="capitalize tracking-wide text-sm text-indigo-500">
+                                    <%= v.title.slice(0,32) %><%= v.title.slice(32,33) ? "..." : "" %>
+                                </div>
+                                <a class="capitalize block mt-1 text-sm leading-tight text-black">
+                                    <%= v.author.name.slice(0,32) %> <%=  v.author.name.slice(32,33) ? "..." : "" %>
+                                </a>
+                            </div>
+                            <div class="hidden xl:hidden md:inline">
+                                <div class="capitalize tracking-wide text-sm text-indigo-500">
+                                    <%= v.title.slice(0,20) %><%= v.title.slice(20,21) ? "..." : "" %>
+                                </div>
+                                <a class="capitalize block mt-1 text-sm leading-tight text-black">
+                                    <%= v.author.name.slice(0,20) %> <%=  v.author.name.slice(20,21) ? "..." : "" %>
+                                </a>
+                            </div>
+                            <div class="hidden xl:inline">
+                                <div class="capitalize tracking-wide text-sm text-indigo-500">
+                                    <%= v.title.slice(0,27) %><%= v.title.slice(27,28) ? "..." : "" %>
+                                </div>
+                                <a class="capitalize block mt-1 text-sm leading-tight text-black">
+                                    <%= v.author.name.slice(0,27) %> <%=  v.author.name.slice(27,28) ? "..." : "" %>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% }) %> 
 </div>

@@ -3,28 +3,24 @@
     <head>
         <%- include('./section/head') -%>
     </head>
-    <body class="bg-white flex flex-col text-black dark:text-white dark:bg-black select-none overflow-y overflow-x-hidden">
-        <main class="transition ease-in z-0 h-screen w-screen flex">
-            <%- include('./section/navbar') -%>
-            <section class="flex-auto p-6 pt-16">
-                <div class="container mx-auto flex">
-                    <div class="w-full mx-16 py-3">
-                        <div>
-                            <% if (video) { %>
-                                <%- include('./pages/video.ejs') -%>
-                            <% } %>
-                            <% if (videos) { %>
-                                <%- include('./pages/videos.ejs') -%>
-                            <% } %>
-                            <% if (!video && !videos) { %>
-                                <%- include('./pages/home.ejs') -%>
-                            <% } %>
-                        </div>
-                    </div>
-                </div>
-                <%- include('./section/footer') -%>
-            </section>
-        </main>
+    <body class="bg-white flex flex-col text-black dark:text-white dark:bg-black select-none overflow-y overflow-x-hidden transition easy-in-out duration-300">
+        <%- include('./section/navbar') -%>
+        <div class="flex overflow-hidden pt-16">
+            <div class="h-full w-full relative overflow-y-auto px-4">
+                <main>
+                    <% if (video) { %>
+                        <%- include('./pages/video.ejs') -%>
+                    <% } %>
+                    <% if (videos) { %>
+                        <%- include('./pages/videos.ejs') -%>
+                    <% } %>
+                    <% if (!video && !videos) { %>
+                        <%- include('./pages/home.ejs') -%>
+                    <% } %>
+                    <%- include('./section/footer') -%>
+                </main>
+            </div>
+        </div>
         <%- include('./section/system') -%>
     </body>
 </html>
