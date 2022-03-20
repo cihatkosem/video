@@ -1,9 +1,6 @@
 const app = require('express')(),
   rateLimit = require('express-rate-limit'),
-  pageLimit = global.pageLimit = {
-    normal: rateLimit({ windowMs: 1000, max: 2, message: { status: "API limit exceeded" } }),
-    api: rateLimit({ windowMs: 10 * 1000, max: 1, message: { status: "API limit exceeded" } })
-  }
+  pageLimit = rateLimit({ windowMs: 1000, max: 2, message: { status: "API limit exceeded" } })
 
 global.ytdl = require('ytdl-core')
 global.yts = require('yt-search')
@@ -12,7 +9,7 @@ global.randomstring = require("randomstring")
 global.delay = require('delay')
 global.Functions = require("./Functions")
 
-app.use(pageLimit.normal)
+app.use(pageLimit)
 app.use(require('body-parser').urlencoded({ extended: true }))
 app.use(require('body-parser').json())
 app.use(require('express').static(require('path').join(__dirname, './views')))
