@@ -1,6 +1,6 @@
 module.exports = async function index(req, res, next) {
     let params = req.params, body = req.body
-    if (body.videoname) return res.redirect(`/video/bul/${body.videoname}`)
+    if (body.videoname) return res.redirect(`/bul/${body.videoname}`)
     if (req.url == "/") return res.render('index', { search: null, video: null, videos: null, related: null })
     let search = params.search ? await yts(params.search) : null
     let videos = search ? search.videos.slice(0, 15) : null

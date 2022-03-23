@@ -15,8 +15,8 @@ module.exports.Connection = async function Connection(server) {
 
 module.exports.pages = pages = {
     function: async function func(app) {
-        app.get(["/", "/video/bul/:search", "/video/izle/:videoid"], require("./Index.js"))
-        app.post(["/", "/video/bul/*", "/video/izle/*"], require("./Index.js"))
+        app.get(["/", "/bul/:search", "/izle/:videoid"], require("./Index.js"))
+        app.post(["/", "/bul/*", "/izle/*"], require("./Index.js"))
         app.use(async function (req, res) { await pages.error(req, res) })
     },
     error: async function error(req, res) {

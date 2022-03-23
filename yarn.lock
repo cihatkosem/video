@@ -3512,10 +3512,10 @@
   dependencies:
     "npm-normalize-package-bin" "^1.0.1"
 
-"npm-check-updates@^12.5.3":
-  "integrity" "sha512-siFg/+Un+j4tLA6GJCnk6hz2YU4Yc5bftDnOoiSRLKL6NeAS3FScB32mtKNBtITMJf2nsoZSr8vH+wdUGeP19g=="
-  "resolved" "https://registry.npmjs.org/npm-check-updates/-/npm-check-updates-12.5.3.tgz"
-  "version" "12.5.3"
+"npm-check-updates@^12.5.4":
+  "integrity" "sha512-4+27zaTdieWgvPLaCZ/A6Q2WC1cYVcrc2SqVmLFYgkWBrKw1QkwpeV16FSvkFGZr3OdFyr7Dpjw8JRn4H2QxFw=="
+  "resolved" "https://registry.npmjs.org/npm-check-updates/-/npm-check-updates-12.5.4.tgz"
+  "version" "12.5.4"
   dependencies:
     "chalk" "^4.1.2"
     "cint" "^8.2.1"
