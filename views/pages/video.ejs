@@ -3,7 +3,7 @@
     <div class="flex pt-4 px-4 w-full">
         <input id="videoname" name="videoname" type="text"
             class="grow p-2 mx-1 bg-gray-200 focus:outline-none bg-gray-100 block py-2 px-4 rounded-lg text-black"
-            placeholder="Video Ara!" aria-describedby= "help" autocomplete= "off" autofocus required />
+            placeholder="Search video or music!" aria-describedby= "help" autocomplete= "off" autofocus required />
         <button type="submit"
             class="w-16 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider block rounded-lg hover:bg-purple-700">
             <i class="far fa-search"></i>
@@ -15,7 +15,7 @@
     <% if (related) { %>
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-2 right-0 bg-black ml-0 md:ml-0 xl:ml-2 rounded-lg mt-8 md:mt-4 xl:mt-0 flex flex-wrap ">
             <% related.slice(0,6).map(v => { %> 
-                <div onclick="location.href='/izle/<%= v.id %>'"
+                <div onclick="location.href='/watch/<%= v.id %>'"
                     class="flex items-center justify-center flex-col m-1 rounded-lg cursor-pointer">
                     <div class="flex items-center">
                         <div class="flex-shrink-0 bg-gray-200 dark:bg-gray-900 dark:bg-opacity-20 shadow-2xl max-w-md mx-auto rounded-xl overflow-hidden md:max-w-2xl">

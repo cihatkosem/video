@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="tr">
+    <head>
+        <%- include('./section/head') -%>
+    </head>
+    <body class="bg-white flex flex-col text-black dark:text-white dark:bg-black select-none overflow-y overflow-x-hidden transition easy-in-out duration-300">
+        <%- include('./section/navbar') -%>
+        <div class="h-screen w-screen flex justify-center items-center">
+            <p class="font-black text-[100px] animate-ping absolute opacity-50 hover:text-red-500 transition easy-in-out duration-600">404</p>
+            <p class="hidden md:inline xl:inline 2xl:inline relative font-black text-[100px] hover:text-red-500 transition easy-in-out duration-600 p-4">404</p>
+            <p class="p-4"> We could not find the page you were looking for. </p>
+        </div>
+        <%- include('./section/system') -%>
+    </body>
+</html>

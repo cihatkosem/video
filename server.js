@@ -1,6 +1,6 @@
-const app = require('express')(),
-  rateLimit = require('express-rate-limit'),
-  pageLimit = rateLimit({ windowMs: 1000, max: 2, message: { status: "API limit exceeded" } })
+const app = require('express')()
+const { createServer } = require('http')
+const rateLimit = require('express-rate-limit')
 
 global.ytdl = require('ytdl-core')
 global.yts = require('yt-search')
@@ -9,7 +9,7 @@ global.randomstring = require("randomstring")
 global.delay = require('delay')
 global.Functions = require("./Functions")
 
-app.use(pageLimit)
+app.use(rateLimit({ windowMs: 1000, max: 2, message: { status: "API limit exceeded" } }))
 app.use(require('body-parser').urlencoded({ extended: true }))
 app.use(require('body-parser').json())
 app.use(require('express').static(require('path').join(__dirname, './views')))
@@ -20,4 +20,4 @@ app.set('trust proxy', true)
 app.set('views', require('path').join(__dirname, './views/'))
 
 require("./Functions").pages.function(app)
-require("./Functions").Connection(require('http').createServer(app))
+require("./Functions").Connection(createServer(app))

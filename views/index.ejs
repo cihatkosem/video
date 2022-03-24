@@ -3,10 +3,10 @@
     <head>
         <%- include('./section/head') -%>
     </head>
-    <body class="bg-white flex flex-col text-black dark:text-white dark:bg-black select-none overflow-y overflow-x-hidden transition easy-in-out duration-300">
+    <body class="bg-white flex flex-col text-black dark:text-white dark:bg-[#1f0418] select-none overflow-y overflow-x-hidden transition easy-in-out duration-300">
         <%- include('./section/navbar') -%>
         <div class="flex overflow-hidden pt-16">
-            <div class="h-full w-full relative overflow-y-auto px-4">
+            <div class="h-full w-full relative overflow-y-auto overflow-x-hidden px-4">
                 <main>
                     <% if (video) { %>
                         <%- include('./pages/video.ejs') -%>
