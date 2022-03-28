@@ -21,26 +21,26 @@
                         <div class="p-4">
                             <div class="inline md:hidden xl:hidden">
                                 <div class="capitalize tracking-wide text-sm text-indigo-500">
-                                    <%= v.title.slice(0,32) %><%= v.title.slice(32,33) ? "..." : "" %>
+                                    <%= v.title.toLowerCase().slice(0,32) %><%= v.title.slice(32,33) ? "..." : "" %>
                                 </div>
                                 <a class="capitalize block mt-1 text-sm leading-tight text-black dark:text-white">
-                                    <%= v.author.name.slice(0,32) %> <%=  v.author.name.slice(32,33) ? "..." : "" %>
+                                    <%= v.author.name.toLowerCase().slice(0,32) %> <%=  v.author.name.slice(32,33) ? "..." : "" %>
                                 </a>
                             </div>
                             <div class="hidden xl:hidden md:inline">
                                 <div class="capitalize tracking-wide text-sm text-indigo-500">
-                                    <%= v.title.slice(0,20) %><%= v.title.slice(20,21) ? "..." : "" %>
+                                    <%= v.title.toLowerCase().slice(0,20) %><%= v.title.slice(20,21) ? "..." : "" %>
                                 </div>
                                 <a class="capitalize block mt-1 text-sm leading-tight text-black dark:text-white">
-                                    <%= v.author.name.slice(0,20) %> <%=  v.author.name.slice(20,21) ? "..." : "" %>
+                                    <%= v.author.name.toLowerCase().slice(0,20) %> <%=  v.author.name.slice(20,21) ? "..." : "" %>
                                 </a>
                             </div>
                             <div class="hidden xl:inline">
                                 <div class="capitalize tracking-wide text-sm text-indigo-500">
-                                    <%= v.title.slice(0,27) %><%= v.title.slice(27,28) ? "..." : "" %>
+                                    <%= v.title.toLowerCase().slice(0,27) %><%= v.title.slice(27,28) ? "..." : "" %>
                                 </div>
                                 <a class="capitalize block mt-1 text-sm leading-tight text-black dark:text-white">
-                                    <%= v.author.name.slice(0,27) %> <%=  v.author.name.slice(27,28) ? "..." : "" %>
+                                    <%= v.author.name.toLowerCase().slice(0,27) %> <%=  v.author.name.slice(27,28) ? "..." : "" %>
                                 </a>
                             </div>
                         </div>
