@@ -1,6 +1,6 @@
 {
     "name": "drizzlyvideo",
-    "version": "0.0.9",
+    "version": "0.1.2",
     "description": "(beta) watch no ads videos",
     "author": "CihatKsm <cihatksm@gmail.com>",
     "license": "MIT",
@@ -17,10 +17,9 @@
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
-        "check": "npx npm-check-updates",
         "update": "ncu -u",
-        "nodemon": "nodemon server.js",
-        "tailwindcss": "npx tailwindcss -i ./views/css/tailwind.css -o ./views/css/style.css --watch"
+        "dev": "nodemon server.js",
+        "tailwind": "npx tailwindcss -i ./views/css/tailwind.css -o ./views/css/style.css --watch"
     },
     "engines": {
         "node": "^17.x"
