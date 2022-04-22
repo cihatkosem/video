@@ -1,5 +1,6 @@
 html {
     font-family: 'Montserrat', sans-serif;
+    @-webkit-text-size-adjust: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -8,7 +9,6 @@ html {
 
 ::-webkit-scrollbar-thumb {
     background: #374151;
-    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-track {

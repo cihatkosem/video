@@ -1,7 +1,7 @@
 <form method="POST">
     <div class="flex pt-4 px-4 w-full">
         <input id="videoname" name="videoname" type="text"
-            class="grow p-2 mx-1 bg-gray-200 focus:outline-none bg-gray-100 text-black block py-2 px-4 rounded-lg"
+            class="grow p-2 mx-1 bg-gray-200 focus:outline-none text-black block py-2 px-4 rounded-lg"
             placeholder="Search video or music!" aria-describedby= "help" autocomplete= "off" autofocus required />
         <button type="submit"
             class="w-16 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider block rounded-lg hover:bg-purple-700">
@@ -11,7 +11,7 @@
 </form>
 <div class="mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
     <% videos.slice(0,15).map(v => { %> 
-        <div onclick="location.href='/watch/<%= v.videoId %>'" class="rounded-lg cursor-pointer">
+        <div onclick="location.href='/?watch=<%= v.videoId %>'" class="rounded-lg cursor-pointer">
             <div class="flex items-center">
                 <div class="flex-shrink-0 bg-gray-200 dark:bg-blue-800 dark:bg-opacity-10 shadow-2xl max-w-md mx-auto rounded-xl overflow-hidden md:max-w-2xl">
                     <div class="md:flex">
