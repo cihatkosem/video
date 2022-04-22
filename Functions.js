@@ -15,6 +15,11 @@ module.exports.Connection = async function Connection(server) {
 
 module.exports.pages = pages = {
     function: async function func(app) {
+        app.use((req,res,next) => { 
+          console.log(req.headers["fly-forwarded-proto"])
+          if (req.headers['fly-forwarded-proto'] !== "https") return res.redirect("https://video.drizzlydeveloper.xyz")
+          else next()
+        })  
         app.get(["/", "/search/:search", "/watch/:videoid"], require("./Index.js"))
         app.post(["/", "/search/*", "/watch/*"], require("./Index.js"))
         app.use(async function (req, res) { return res.status(404).render("error") })
