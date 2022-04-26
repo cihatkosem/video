@@ -1,24 +1,22 @@
 
 <div class="flex justify-center items-center text-center">
     <div class="mt-8 mx-4">
-        <p class="text-lg mb-2">Welcome;</p>
+        <p class="text-lg mb-2">Hoşgeldin;</p>
         <p class="text-sm mb-10">
-            This (beta) website is an ad-free website that offers videos from youtube upon your request.
-            Don't forget to report any problem with us.
-            <br>
-            I almost forgot, note that no illegal business is being done.
+            Bu (beta) web sitesi, isteğiniz üzerine youtube'dan videolar sunan reklamsız bir web sitesidir.
+            Herhangi bir sorunu bize bildirmeyi unutmayın.
             <br><br>
             Drizzly Developer #Video (beta)
         </p>
         <div class="transition delay-100 duration-300 ease-in-out pb-4">
             <a href="http://drizzlydeveloper.xyz/hakkinda" class="m-1 px-4 inline-flex h-10 items-center rounded text-green-800 bg-green-200">
-                <i class="fa-solid fa-face-thinking pr-1"></i> About
+                <i class="fa-solid fa-face-thinking pr-1"></i> Hakkımızda
             </a>
             <a href="http://drizzlydeveloper.xyz/api" class="m-1 px-4 inline-flex h-10 items-center rounded text-green-800 bg-pink-200">
                 <i class="fa-solid fa-database pr-1"></i> Drizzly Api
             </a>
             <a href="http://drizzlydeveloper.xyz/gizlilik_sozlesmesi" class="m-1 px-4 inline-flex h-10 items-center rounded text-green-800 bg-blue-200">
-                <i class="fa-solid fa-face-zipper pr-1"></i> Confidentiality
+                <i class="fa-solid fa-face-zipper pr-1"></i> Gizlilik Sözleşmesi
             </a>
         </div>
         <form>
@@ -28,12 +26,12 @@
                 var downloadTimer = setInterval(function () {
                     let before = `
                         <a class="grow p-2 w-full cursor-not-allowed transition duration-300 focus:outline-none bg-purple-300 text-white font-bold tracking-wider block rounded-lg">
-                            Await ${awaittime} second for search video or music.
+                            Video veya Müzik aramak için ${awaittime} saniye beklemelisin.
                         </a>`;
                     let after = `
                         <input id="videoname" name="search" type="text"
                             class="grow p-2 mx-1 bg-gray-200 focus:outline-none bg-gray-100 block py-2 px-4 rounded-lg text-black"
-                            placeholder="Search video or music!" aria-describedby= "help" autocomplete= "off" autofocus required />
+                            placeholder="Video veya Müzik arayabilirsin!" aria-describedby= "help" autocomplete= "off" autofocus required />
                         <button type="submit"
                             class="grow p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider block rounded-lg hover:bg-purple-700">
                             <i class="far fa-search"></i>

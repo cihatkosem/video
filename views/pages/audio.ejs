@@ -1,0 +1,98 @@
+
+<form>
+  <div class="flex pt-4 px-4 w-full">
+      <input id="videoname" name="search" type="text"
+          class="grow p-2 mx-1 bg-gray-200 focus:outline-none block py-2 px-4 rounded-lg text-black"
+          placeholder="Video veya müzik ara!" aria-describedby= "help" autocomplete= "off" autofocus required />
+      <div class="group easy-in-out transition duration-500">
+          <button class="inline group-hover:hidden w-32 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider rounded-lg hover:bg-purple-700">
+              <i class="fa-solid fa-magnifying-glass text-lg"></i>
+          </button>
+          <button type="submit"
+              class="hidden group-hover:inline w-16 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider rounded-lg hover:bg-purple-700">
+              <i class="fa-solid fa-circle-play text-lg"></i>
+          </button>
+          <button type="submit" formaction="/listen"
+              class="hidden group-hover:inline w-16 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider rounded-lg hover:bg-purple-700">
+              <i class="fa-solid fa-music text-lg"></i>
+          </button>
+      </div>
+  </div>
+</form>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-2 p-4">
+  <div>
+      <video class="rounded-2xl w-full border-4 border-[#ff90ff] dark:border-[#6e266e]" id="player"></video>
+      <p class="pt-2 text-lg"> <%= audio.title %> </p>
+      <a href="https://www.youtube.com/channel/<%= audio.channelId %>" 
+          class="pt-2 text-lg leading-tight hover:text-blue-500 duration-500">
+          <i class="fa-brands fa-youtube text-red-600"></i> <%= audio.author.toLowerCase() %>  
+      </a>
+  </div>
+  <% if (related) { %>
+      <div class="grid grid-cols-1 gap-2 rounded-lg w-full">
+          <% related.slice(0,3).map(v => { %> 
+              <div onclick="location.href='/?watch=<%= v.id %>'"
+                  class="flex items-left justify-center rounded-lg cursor-pointer w-full">
+                  <div class="flex justify-center items-left w-full">
+                      <div class="bg-gray-200 dark:bg-gray-900 dark:bg-opacity-20 shadow-2xl rounded-xl w-full duration-500
+                                  border-4 border-gray-200 hover:border-[#ff90ff] dark:border-[#1f0418] dark:hover:border-[#6e266e]">
+                          <div class="flex">
+                              <div>
+                                  <img class="h-[120px] rounded-l-lg" src="<%= v.thumbnails[v.thumbnails.length - 1].url %>" alt="<%= v.id %>">
+                              </div>
+                              <div class="p-2">
+                                  <div class="capitalize tracking-wide text-sm text-indigo-500 whitespace-normal">
+                                      <%= v.title.toLowerCase() %>
+                                  </div>
+                                  <a class="capitalize block mt-1 text-sm leading-tight text-black dark:text-white">
+                                      <%= v.author.name.toLowerCase() %>  
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          <% }) %> 
+      </div>
+  <% } %>
+  <div>
+      <div class="py-2">
+          <a class="capitalize block mt-1 text-sm leading-tight text-black dark:text-white">
+              <i class="fa-solid fa-calendar-arrow-up"></i> <%= audio.publishDate %>  
+          </a>
+          <a class="capitalize block mt-1 text-sm leading-tight text-black dark:text-white">
+              <i class="fa-solid fa-eye"></i> <%= audio.viewCount %>  
+          </a>
+      </div>
+  </div>
+</div>
+
+<script>
+  var tag = document.createElement('script')
+  tag.src = "https://www.youtube.com/iframe_api"
+
+  var firstScriptTag = document.getElementsByTagName('script')[0]
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+
+  var player;
+  function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+          videoId: '<%= audio.videoId %>',
+          playerVars: {
+              controls: 1,
+          },
+          events: {
+              'onReady': onPlayerReady,
+          }
+      })
+  }
+
+  function onPlayerReady(event) {
+      setTimeout(() => event.target.playVideo(), 2000);
+      
+  }
+
+  function stopVideo() {
+      player.stopVideo();
+  }
+</script>

@@ -1,62 +1,65 @@
 
-<form>
-    <div class="flex pt-4 px-4 w-full">
-        <input id="videoname" name="search" type="text"
-            class="grow p-2 mx-1 bg-gray-200 focus:outline-none block py-2 px-4 rounded-lg text-black"
-            placeholder="Search video or music!" aria-describedby= "help" autocomplete= "off" autofocus required />
-        <button type="submit"
-            class="w-16 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider block rounded-lg hover:bg-purple-700">
-            <i class="far fa-search"></i>
-        </button>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-2 p-4">
+    <div>
+        <video class="rounded-2xl w-full border-4 border-[#ff90ff] dark:border-[#6e266e]" id="player"></video>
+        <p class="pt-2 text-lg"> <%= video.title %> </p>
+        <a href="https://www.youtube.com/channel/<%= video.channelId %>" 
+            class="pt-2 text-lg leading-tight hover:text-blue-500 duration-500">
+            <i class="fa-brands fa-youtube text-red-600"></i> <%= video.author.toLowerCase() %>  
+        </a>
+        <a class="capitalize mt-1 text-sm leading-tight text-black dark:text-white">
+            <p class="text-left"><i class="fa-solid fa-calendar-arrow-up pr-1"></i> <%= video.publishDate %> </p>
+            <p class="text-left"><i class="fa-solid fa-eye pr-1"></i> <%= video.viewCount %> </p>
+        </a>
     </div>
-</form>
-<div class="flex flex-wrap p-8">
-    <div class="rounded-lg" id="player"></div>
     <% if (related) { %>
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-2 right-0 bg-black ml-0 md:ml-0 xl:ml-2 rounded-lg mt-8 md:mt-4 xl:mt-0 flex-wrap ">
-            <% related.slice(0,6).map(v => { %> 
-                <div onclick="location.href='/?watch=<%= v.id %>'"
-                    class="flex items-center justify-center flex-col m-1 rounded-lg cursor-pointer">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0 bg-gray-200 dark:bg-gray-900 dark:bg-opacity-20 shadow-2xl max-w-md mx-auto rounded-xl overflow-hidden md:max-w-2xl">
-                            <div class="md:flex">
-                                <div class="md:shrink-0">
-                                    <img class="h-36 w-full object-cover md:h-full md:w-32" src="<%= v.thumbnails[v.thumbnails.length - 1].url %>" alt="<%= v.id %>">
-                                </div>
-                                <div class="p-2">
-                                    <div class="inline md:hidden xl:hidden">
-                                        <div class="capitalize tracking-wide text-sm text-indigo-500">
-                                            <%= v.title.toLowerCase().slice(0,32) %><%= v.title.slice(32,33) ? "..." : "" %>
-                                        </div>
-                                        <a class="capitalize block mt-1 text-sm leading-tight text-black dark:text-white">
-                                            <%= v.author.name.toLowerCase().slice(0,32) %> <%=  v.author.name.slice(32,33) ? "..." : "" %>
-                                        </a>
-                                    </div>
-                                    <div class="hidden xl:hidden md:inline">
-                                        <div class="capitalize tracking-wide text-sm text-indigo-500">
-                                            <%= v.title.toLowerCase().slice(0,20) %><%= v.title.slice(20,21) ? "..." : "" %>
-                                        </div>
-                                        <a class="capitalizeblock mt-1 text-sm leading-tight text-black dark:text-white">
-                                            <%= v.author.name.toLowerCase().slice(0,20) %> <%=  v.author.name.slice(20,21) ? "..." : "" %>
-                                        </a>
-                                    </div>
-                                    <div class="hidden xl:inline">
-                                        <div class="capitalize tracking-wide text-sm text-indigo-500">
-                                            <%= v.title.toLowerCase().slice(0,20) %><%= v.title.slice(20,21) ? "..." : "" %>
-                                        </div>
-                                        <a class="capitalize block mt-1 text-sm leading-tight text-black dark:text-white">
-                                            <%= v.author.name.toLowerCase().slice(0,20) %> <%=  v.author.name.slice(20,21) ? "..." : "" %>
-                                        </a>
-                                    </div>
-                                </div>
+        <div class="grid grid-cols-1 gap-1 rounded-lg w-full">
+            <form>
+                <div class="flex w-full">
+                    <input id="videoname" name="search" type="text"
+                        class="grow p-2 mx-1 bg-gray-200 focus:outline-none block py-2 px-4 rounded-lg text-black"
+                        placeholder="Video veya müzik ara!" aria-describedby= "help" autocomplete= "off" autofocus required />
+                    <div class="group easy-in-out transition duration-500">
+                        <button class="inline group-hover:hidden w-32 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider rounded-lg hover:bg-purple-700">
+                            <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                        </button>
+                        <button type="submit"
+                            class="hidden group-hover:inline w-16 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider rounded-lg hover:bg-purple-700">
+                            <i class="fa-solid fa-circle-play text-lg"></i>
+                        </button>
+                        <button type="submit" formaction="/listen"
+                            class="hidden group-hover:inline w-16 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider rounded-lg hover:bg-purple-700">
+                            <i class="fa-solid fa-music text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <% related.slice(0,3).map(v => { %> 
+                <div onclick="location.href='/?watch=<%= v.id %>'" class="cursor-pointer">
+                    <card class="w-full flex flex-wrap">
+                        <div class="relative rounded-2xl bg-black border-4 border-gray-200 hover:border-[#ff90ff] dark:border-[#1f0418] dark:hover:border-[#6e266e] duration-500">
+                            <a>
+                                <img src="<%= v.thumbnails[v.thumbnails.length - 1].url %>" class="h-24 rounded-xl" />
+                            </a>
+                        </div>
+                        <div class="flex flex-row p-4 gap-2 opacity-80">
+                            <div clas="flex flex-col">
+                                <p class="capitalize text-md font-semibold">
+                                    <%= v.title.toLowerCase() %>
+                                </p>
+                                <a class="capitalize text-sm mt-2">
+                                    <i class="fa-brands fa-youtube text-red-600"></i> <%= v.author.name.toLowerCase() %> 
+                                </a>
                             </div>
                         </div>
-                    </div>
+                    </card>
                 </div>
             <% }) %> 
         </div>
     <% } %>
 </div>
+
 <script>
     var tag = document.createElement('script')
     tag.src = "https://www.youtube.com/iframe_api"
@@ -67,11 +70,9 @@
     var player;
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
-            height: '324',
-            width: '576',
             videoId: '<%= video.videoId %>',
             playerVars: {
-                'playsinline': 1
+                controls: 1,
             },
             events: {
                 'onReady': onPlayerReady,
@@ -80,7 +81,8 @@
     }
 
     function onPlayerReady(event) {
-        event.target.playVideo();
+        setTimeout(() => event.target.playVideo(), 2000);
+        
     }
 
     function stopVideo() {

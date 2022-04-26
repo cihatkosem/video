@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" class="font-montserrat">
     <head>
         <%- include('./section/head') -%>
     </head>
@@ -11,10 +11,13 @@
                     <% if (video) { %>
                         <%- include('./pages/video.ejs') -%>
                     <% } %>
+                    <% if (audio) { %>
+                        <%- include('./pages/audio.ejs') -%>
+                    <% } %>
                     <% if (videos) { %>
                         <%- include('./pages/videos.ejs') -%>
                     <% } %>
-                    <% if (!video && !videos) { %>
+                    <% if (!video && !videos && !audio) { %>
                         <%- include('./pages/home.ejs') -%>
                     <% } %>
                     <%- include('./section/footer') -%>

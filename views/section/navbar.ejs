@@ -13,6 +13,22 @@
                 </span>
             </button>
         </div>
+        <div>
+            <% if (audio) { %>
+                <button onclick="location.href='/?watch=<%= audio.videoId %>'" class="text-gray-800 ml-4 transition-colors mr-2">
+                    <span>
+                        <i class="fa-solid fa-video text-xl text-white hover:text-red-600 duration-500"></i>
+                    </span>
+                </button>
+            <% } %>
+            <% if (video) { %>
+                <button onclick="location.href='/?listen=<%= video.videoId %>'" class="text-gray-800 ml-4 transition-colors mr-2">
+                    <span>
+                        <i class="fa-solid fa-music fa-solid fa-moon text-xl text-blue-500 hover:text-blue-700 duration-500"></i>
+                    </span>
+                </button>
+            <% } %>
+        </div>
     </div>
     <div class="flex flex-wrap transition ease-in-out duration-500">
         <div>
