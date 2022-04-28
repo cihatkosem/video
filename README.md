@@ -10,6 +10,7 @@
 → <a href="http://video.drizzlydeveloper.xyz/?watch=qUsE49lUQUY" target="_blank"> video.drizzlydeveloper.xyz/?watch=qUsE49lUQUY </a> <br>
 > If you are going to open a music you will use this page. This page only links to the music you want. <br>
 → <a href="http://video.drizzlydeveloper.xyz/?listen=qUsE49lUQUY" target="_blank"> video.drizzlydeveloper.xyz/?listen=qUsE49lUQUY </a> <br>
+(In some music, access to the system is restricted, and access is blocked beyond our control. Keep this in mind.)
 <br>
 
 # 📈 Stats:
