@@ -17,7 +17,7 @@ module.exports = async function index(req, res, next) {
             mp3 = formats ? formats.filter(f => f.container == "webm" && f.mimeType == `audio/webm; codecs="opus"`) : null
 
         let details = findvideo.player_response
-        let publishDate = await Functions.day("true", "true", details.microformat.playerMicroformatRenderer.publishDate)
+        let publishDate = await Functions.day(true, false, details.microformat.playerMicroformatRenderer.publishDate)
 
         let video = {
             title: details.videoDetails.title,
