@@ -8,7 +8,6 @@
 → <a href="http://video.drizzlydeveloper.xyz/?search=öyle+kolaysa" target="_blank"> video.drizzlydeveloper.xyz/?search=öyle+kolaysa</a> <br>
 > If you are going to open a video you will use this page. This page links to youtube. <br>
 → <a href="http://video.drizzlydeveloper.xyz/?watch=qUsE49lUQUY" target="_blank"> video.drizzlydeveloper.xyz/?watch=qUsE49lUQUY </a> <br>
-<br>
 > If you are going to open a music you will use this page. This page only links to the music you want. <br>
 → <a href="http://video.drizzlydeveloper.xyz/?listen=qUsE49lUQUY" target="_blank"> video.drizzlydeveloper.xyz/?listen=qUsE49lUQUY </a> <br>
 <br>
