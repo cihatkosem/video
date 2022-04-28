@@ -21,6 +21,7 @@ module.exports = async function index(req, res, next) {
 
         let video = {
             title: details.videoDetails.title,
+            thumbnail: findvideo.videoDetails.thumbnails.reverse()[0].url,
             videoId: details.videoDetails.videoId,
             channelId: details.videoDetails.channelId,
             publishDate: publishDate.slice(0, publishDate.search("00.00.00")),

@@ -20,27 +20,17 @@
                     <input id="videoname" name="search" type="text"
                         class="grow p-2 mx-1 bg-gray-200 focus:outline-none block py-2 px-4 rounded-lg text-black"
                         placeholder="Video veya müzik ara!" aria-describedby= "help" autocomplete= "off" autofocus required />
-                    <div class="group easy-in-out transition duration-500">
-                        <button class="inline group-hover:hidden w-32 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider rounded-lg hover:bg-purple-700">
-                            <i class="fa-solid fa-magnifying-glass text-lg"></i>
-                        </button>
-                        <button type="submit"
-                            class="hidden group-hover:inline w-16 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider rounded-lg hover:bg-purple-700">
-                            <i class="fa-solid fa-circle-play text-lg"></i>
-                        </button>
-                        <button type="submit" formaction="/listen"
-                            class="hidden group-hover:inline w-16 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider rounded-lg hover:bg-purple-700">
-                            <i class="fa-solid fa-music text-lg"></i>
-                        </button>
-                    </div>
+                    <button class="w-32 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider rounded-lg hover:bg-purple-700">
+                        <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                    </button>
                 </div>
             </form>
             <% related.slice(0,3).map(v => { %> 
                 <div onclick="location.href='/?watch=<%= v.id %>'" class="cursor-pointer">
-                    <card class="w-full flex flex-wrap">
-                        <div class="relative rounded-2xl bg-black border-4 border-gray-200 hover:border-[#ff90ff] dark:border-[#1f0418] dark:hover:border-[#6e266e] duration-500">
+                    <card class="w-full flex flex-wrap items-center">
+                        <div class="relative rounded-2xlborder-4 border-gray-200 hover:border-[#ff90ff] dark:border-[#1f0418] dark:hover:border-[#6e266e] duration-500">
                             <a>
-                                <img src="<%= v.thumbnails[v.thumbnails.length - 1].url %>" class="h-24 rounded-xl" />
+                                <img src="<%= v.thumbnails[v.thumbnails.length - 1].url %>" class="h-16 rounded-xl" />
                             </a>
                         </div>
                         <div class="flex flex-row p-4 gap-2 opacity-80">

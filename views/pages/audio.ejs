@@ -1,98 +1,247 @@
-
 <form>
-  <div class="flex pt-4 px-4 w-full">
-      <input id="videoname" name="search" type="text"
-          class="grow p-2 mx-1 bg-gray-200 focus:outline-none block py-2 px-4 rounded-lg text-black"
-          placeholder="Video veya müzik ara!" aria-describedby= "help" autocomplete= "off" autofocus required />
-      <div class="group easy-in-out transition duration-500">
-          <button class="inline group-hover:hidden w-32 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider rounded-lg hover:bg-purple-700">
-              <i class="fa-solid fa-magnifying-glass text-lg"></i>
-          </button>
-          <button type="submit"
-              class="hidden group-hover:inline w-16 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider rounded-lg hover:bg-purple-700">
-              <i class="fa-solid fa-circle-play text-lg"></i>
-          </button>
-          <button type="submit" formaction="/listen"
-              class="hidden group-hover:inline w-16 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider rounded-lg hover:bg-purple-700">
-              <i class="fa-solid fa-music text-lg"></i>
-          </button>
-      </div>
-  </div>
+    <div class="flex pt-4 px-4 w-full">
+        <input id="videoname" name="search" type="text"
+            class="grow p-2 mx-1 bg-gray-200 focus:outline-none block py-2 px-4 rounded-lg text-black"
+            placeholder="Video veya müzik ara!" aria-describedby="help" autocomplete="off" autofocus required />
+        <button class="w-32 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider rounded-lg hover:bg-purple-700">
+            <i class="fa-solid fa-magnifying-glass text-lg"></i>
+        </button>
+    </div>
 </form>
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 p-4">
-  <div>
-      <video class="rounded-2xl w-full border-4 border-[#ff90ff] dark:border-[#6e266e]" id="player"></video>
-      <p class="pt-2 text-lg"> <%= audio.title %> </p>
-      <a href="https://www.youtube.com/channel/<%= audio.channelId %>" 
-          class="pt-2 text-lg leading-tight hover:text-blue-500 duration-500">
-          <i class="fa-brands fa-youtube text-red-600"></i> <%= audio.author.toLowerCase() %>  
-      </a>
-  </div>
-  <% if (related) { %>
-      <div class="grid grid-cols-1 gap-2 rounded-lg w-full">
-          <% related.slice(0,3).map(v => { %> 
-              <div onclick="location.href='/?watch=<%= v.id %>'"
-                  class="flex items-left justify-center rounded-lg cursor-pointer w-full">
-                  <div class="flex justify-center items-left w-full">
-                      <div class="bg-gray-200 dark:bg-gray-900 dark:bg-opacity-20 shadow-2xl rounded-xl w-full duration-500
-                                  border-4 border-gray-200 hover:border-[#ff90ff] dark:border-[#1f0418] dark:hover:border-[#6e266e]">
-                          <div class="flex">
-                              <div>
-                                  <img class="h-[120px] rounded-l-lg" src="<%= v.thumbnails[v.thumbnails.length - 1].url %>" alt="<%= v.id %>">
-                              </div>
-                              <div class="p-2">
-                                  <div class="capitalize tracking-wide text-sm text-indigo-500 whitespace-normal">
-                                      <%= v.title.toLowerCase() %>
-                                  </div>
-                                  <a class="capitalize block mt-1 text-sm leading-tight text-black dark:text-white">
-                                      <%= v.author.name.toLowerCase() %>  
-                                  </a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          <% }) %> 
-      </div>
-  <% } %>
-  <div>
-      <div class="py-2">
-          <a class="capitalize block mt-1 text-sm leading-tight text-black dark:text-white">
-              <i class="fa-solid fa-calendar-arrow-up"></i> <%= audio.publishDate %>  
-          </a>
-          <a class="capitalize block mt-1 text-sm leading-tight text-black dark:text-white">
-              <i class="fa-solid fa-eye"></i> <%= audio.viewCount %>  
-          </a>
-      </div>
-  </div>
+    <div>
+        <div class="w-full">
+            <div class='flex w-full bg-gray-200 dark:bg-gray-900 shadow-md rounded-lg overflow-hidden mx-auto'>
+                <div class="flex flex-col w-full">
+                    <div class="flex p-5 items-center">
+                        <img class='w-1/2 object-cover rounded-lg border-4 border-[#ff90ff] dark:border-[#6e266e]' src='<%= audio.thumbnail %>'>
+                        <div class="flex flex-col px-4 w-full">
+                            <span class="text-sm text-red-600 capitalize font-semibold pt-1">
+                                <%= audio.title %>
+                            </span>
+                            <a class="text-xs text-gray-500 uppercase font-medium" 
+                                href="https://www.youtube.com/channel/<%= audio.channelId %>"
+                                class="pt-2 text-lg leading-tight hover:text-blue-500 duration-500">
+                                <i class="fa-brands fa-youtube text-red-600"></i>
+                                <%= audio.author %>
+                            </a>
+                            <a class="text-xs text-gray-500 uppercase font-medium" >
+                                <i class="fa-solid fa-calendar-arrow-up"></i>
+                                <%= audio.publishDate %>
+                            </a>
+                            <a class="text-xs text-gray-500 uppercase font-medium" >
+                                <i class="fa-solid fa-eye"></i>
+                                <%= audio.viewCount %>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col items-center p-5">
+                        <div class="flex items-center">
+                            <div class="flex space-x-3 p-2">
+                                <button onclick="history.back()" class="text-red-500 text-xl">
+                                    <i class="fa-solid fa-backward"></i>
+                                </button>
+                            </div>
+                            <div class="flex space-x-3 p-2">
+                                <button onclick="location.href='/?listen=<%= audio.videoId %>'" class="text-red-500 text-xl">
+                                    <i class="fa-solid fa-repeat"></i>
+                                </button>
+                            </div>
+                            <div class="flex space-x-3 p-2">
+                                <button id="player-left-forward-button" onclick="audio_forward('left')" class="text-red-500 text-xl">
+                                    <i class="fa-solid fa-rotate-left"></i>
+                                </button>
+                            </div>
+                            <div class="flex space-x-3 p-2">
+                                <button id="player-button" onclick="audio_player()" class="text-red-500 text-2xl"></button>
+                            </div>
+                            <div class="flex space-x-3 p-2">
+                                <button id="player-right-forward-button" onclick="audio_forward('right')" class="text-red-500 text-xl">
+                                    <i class="fa-solid fa-rotate-right"></i>
+                                </button>
+                            </div>
+                            <div class="flex space-x-3 p-2">
+                                <button class="text-red-500 text-xl group flex ">
+                                    <i class="fa-solid fa-volume pr-2"></i>
+                                    <div class="hidden group-hover:inline pt-1">
+                                        <div class="range">
+                                            <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="flex space-x-3 p-2">
+                                <button 
+                                <% if (related) { %> onclick="location.href='/?listen=<%=related[0].id %>'" <% } %>
+                                    class="text-red-500 text-xl <%= related ? `cursol-pointer` : `cursor-not-allowed`%>">
+                                    <i class="fa-solid fa-forward"></i>
+                                </button>
+                            </div>
+                            <div class="flex space-x-3 p-2">
+                                <a class="text-red-500 text-xl" 
+                                    href="<%= audio.formats.mp3 %>" target="_blank"
+                                    download="<%= audio.title %>">
+                                    <i class="fa-solid fa-download"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="relative w-full pr-4 lg:-mr-0">
+                            <div class="bg-red-300 dark:bg-gray-800 h-2 w-full rounded-lg"></div>
+                            <div id="player-progressbar" class="bg-red-600 h-2 rounded-lg absolute top-0"></div>
+                        </div>
+                        <div class="flex justify-center pt-2">
+                            <span id="player-currenttime" class="text-xs dark:text-gray-500 text-gray-700 uppercase font-medium pl-2"></span>
+                            <span id="player-totaltime" class="text-xs dark:text-gray-500 text-gray-700 uppercase font-medium pl-1"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <audio id="audio" class="w-0 h-0 absolute opacity-0" controls autoplay>
+            <source src="<%= audio.formats.mp3 %>" type="audio/mpeg">
+            Your browser does not support the audio tag.
+        </audio>
+
+        <script>
+            let id = `<%= related ? related[0].id : null %>`
+            let audio = document.getElementById("audio")
+            let player_button = document.getElementById("player-button")
+            let player_currenttime = document.getElementById("player-currenttime")
+            let player_totaltime = document.getElementById("player-totaltime")
+            let player_progressbar = document.getElementById("player-progressbar")
+
+            $("#volume-bar").on("change input", function () {
+                var vid  =  $("#audio")[0];
+                vid.volume = $(this).val();
+            });
+
+            try {
+                audio_player()
+            } catch (err) {
+                setTimeout(() => audio_player(), 3000);
+            }
+
+            function audio_forward(params) {
+                if (params == 'left') {
+                    audio.currentTime -= 5
+                }
+                if (params == 'right') {
+                    audio.currentTime += 5
+                }
+            }
+
+            function audio_player() {
+                if (audio.paused) {
+                    localStorage.audio = 'playing'
+                    player_button.innerHTML = ` <i class="fa-solid fa-circle-pause"></i>`
+                    audio.play()
+                } else {
+                    localStorage.audio = 'paused'
+                    player_button.innerHTML = ` <i class="fa-solid fa-circle-play"></i>`
+                    audio.pause()
+                }
+            }
+
+            setInterval(() => {
+                if (localStorage.audio == 'finished') {
+                    location.href = `/?listen=${id}`
+                }
+            }, 3000);
+
+            audio.ontimeupdate = function() { 
+                currentTime() 
+                progressBar()
+            };
+
+            audio.onended = function() { 
+                localStorage.audio = 'finished'
+            };
+
+            function progressBar() {
+                let totalseconds = `<%= audio.lengthSeconds %>`
+                let seconds = parseInt(Math.floor(audio.currentTime))
+                player_progressbar.style.width = `${(seconds / totalseconds) * 100 < 1 ? "1" : (seconds / totalseconds) * 100}%`
+            }
+
+            function currentTime() {
+                let seconds = parseInt(Math.floor(audio.currentTime))
+                let minutes = parseInt(seconds / 60)
+                seconds -= minutes * 60
+                const hours = parseInt(minutes / 60)
+                minutes -= hours * 60
+
+                if (hours === 0) 
+                    return player_currenttime.innerHTML = `${minutes}:${String(seconds % 60).padStart(2, 0)}`
+                return player_currenttime.innerHTML = `${String(hours).padStart(2, 0)}:${minutes}:${String(seconds % 60).padStart(2, 0)}`
+            }
+
+            let totalseconds = `<%= audio.lengthSeconds %>`
+            let totalminutes = parseInt(totalseconds / 60)
+            totalseconds -= totalminutes * 60
+            const totalhours = parseInt(totalminutes / 60)
+            totalminutes -= totalhours * 60
+
+            player_currenttime.innerHTML = "0:00"
+            player_totaltime.innerHTML = `/ ${totalhours ? String(totalhours).padStart(2, 0)+":": ""}${totalminutes}:${String(totalseconds % 60).padStart(2, 0)}`
+        </script>
+    </div>
+    <% if (related) { %>
+        <div class="grid grid-cols-1 gap-2 rounded-lg w-full">
+            <% related.slice(0,3).map(v=> { %>
+                <div onclick="location.href='/?listen=<%= v.id %>'"
+                    class="flex items-center justify-center rounded-lg cursor-pointer w-full">
+                    <div class="flex justify-center items-left w-full">
+                        <div class="bg-gray-200 dark:bg-gray-900 dark:bg-opacity-20 shadow-2xl rounded-xl w-full duration-500
+                                    border-4 border-gray-200 hover:border-[#ff90ff] dark:border-[#1f0418] dark:hover:border-[#6e266e]">
+                            <div class="flex">
+                                <div>
+                                    <img class="h-[80px] rounded-l-lg"
+                                        src="<%= v.thumbnails[v.thumbnails.length - 1].url %>" alt="<%= v.id %>">
+                                </div>
+                                <div class="p-2">
+                                    <div class="capitalize tracking-wide text-sm text-indigo-500 whitespace-normal">
+                                        <i class="fa-solid fa-music text-blue-600"></i> <%= v.title.toLowerCase() %>
+                                    </div>
+                                    <a class="capitalize block mt-1 text-sm leading-tight text-black dark:text-white">
+                                        <i class="fa-brands fa-youtube text-red-600"></i> <%= v.author.name.toLowerCase() %>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } %>
 </div>
 
 <script>
-  var tag = document.createElement('script')
-  tag.src = "https://www.youtube.com/iframe_api"
+    var tag = document.createElement('script')
+    tag.src = "https://www.youtube.com/iframe_api"
 
-  var firstScriptTag = document.getElementsByTagName('script')[0]
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+    var firstScriptTag = document.getElementsByTagName('script')[0]
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
 
-  var player;
-  function onYouTubeIframeAPIReady() {
-      player = new YT.Player('player', {
-          videoId: '<%= audio.videoId %>',
-          playerVars: {
-              controls: 1,
-          },
-          events: {
-              'onReady': onPlayerReady,
-          }
-      })
-  }
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            videoId: '<%= audio.videoId %>',
+            playerVars: {
+                controls: 1,
+            },
+            events: {
+                'onReady': onPlayerReady,
+            }
+        })
+    }
 
-  function onPlayerReady(event) {
-      setTimeout(() => event.target.playVideo(), 2000);
-      
-  }
+    function onPlayerReady(event) {
+        setTimeout(() => event.target.playVideo(), 2000);
 
-  function stopVideo() {
-      player.stopVideo();
-  }
+    }
+
+    function stopVideo() {
+        player.stopVideo();
+    }
 </script>
