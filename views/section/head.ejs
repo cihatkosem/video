@@ -1,7 +1,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Drizzly Video</title>
+<title>Drizzly Video<%= video ? " / " + video.title : audio ? " / " + audio.title : search ? ` / "` + search + `" arama yapıldı.` : "" %></title>
 <meta name="author" content="CihatKsm" />
 <meta name="theme-color" content="#ff00ff" />
 
@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/costum.css">
 
-<meta property="og:title" content="Drizzly Video<%= video ? " / " + video.title : audio ? " / " + audio.title : "" %>" />
+<meta property="og:title" content="Drizzly Video" />
 <meta property="og:url" content="https://video.drizzlydeveloper.xyz/" />
 <meta property="og:footer" content="Official website of Drizzly Developer" />
 <meta property="og:description" content="" />
