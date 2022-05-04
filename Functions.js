@@ -26,14 +26,16 @@ module.exports.pages = pages = {
     }
 }
 
-module.exports.day = async function Day(date, time, time_data, userCreatedAt) {
-    let module = require("dayjs"), data, f1 = "DD MMMM YYYY HH.mm.ss", f2 = "DD MMMM YYYY", f3 = "HH.mm.ss"
-    let day = time_data ? module(time_data).tz('Asia/Istanbul') : module().tz('Asia/Istanbul')
-    if (date == true && time == true) data = day.format(f1)
-    if (date == true && time !== true) data = day.format(f2)
-    if (date !== true && time == true) data = day.format(f3)
-    else data = day.format(f1)
-    return new Promise((resolve) => resolve(userCreatedAt && time_data == undefined ? null : data))
+module.exports.day = async function Day(date, time, time_data) {
+    return new Promise((resolve) => { 
+        let module = require("dayjs")
+        let data;
+        let day = time_data ? module(time_data).tz('Asia/Istanbul') : module().tz('Asia/Istanbul')
+        return date == "true" && time == "true" ? resolve(day.format("DD MMMM YYYY HH.mm.ss")) :
+        date == "true" && time == "false" ? resolve(day.format("DD MMMM YYYY")) :
+        date == "false" && time == "true" ? resolve(day.format("HH.mm.ss")) :
+        data = resolve(day.format(f1))  
+    })
 }
 
 module.exports.translate = async function Translate(toLang, text) {

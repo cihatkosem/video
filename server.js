@@ -9,7 +9,7 @@ global.randomstring = require("randomstring")
 global.delay = require('delay')
 global.Functions = require("./Functions")
 
-app.use(rateLimit({ windowMs: 1000, max: 2, message: { status: "API limit exceeded" } }))
+app.use(rateLimit({ windowMs: 1000, max: 5, message: { status: "API limit exceeded" } }))
 app.use(require('body-parser').urlencoded({ extended: true }))
 app.use(require('body-parser').json())
 app.use(require('express').static(require('path').join(__dirname, './views')))

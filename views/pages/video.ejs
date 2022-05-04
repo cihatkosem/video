@@ -1,5 +1,13 @@
-
-
+<form>
+    <div class="flex w-full">
+        <input id="videoname" name="search" type="text"
+            class="grow p-2 mx-1 bg-gray-200 focus:outline-none block py-2 px-4 rounded-lg text-black"
+            placeholder="Video veya müzik ara!" aria-describedby= "help" autocomplete= "off" autofocus required />
+        <button class="w-32 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider rounded-lg hover:bg-purple-700">
+            <i class="fa-solid fa-magnifying-glass text-lg"></i>
+        </button>
+    </div>
+</form>
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 p-4">
     <div>
         <video class="rounded-2xl w-full border-4 border-[#ff90ff] dark:border-[#6e266e]" id="player"></video>
@@ -14,38 +22,31 @@
         </a>
     </div>
     <% if (related) { %>
-        <div class="grid grid-cols-1 gap-1 rounded-lg w-full">
-            <form>
-                <div class="flex w-full">
-                    <input id="videoname" name="search" type="text"
-                        class="grow p-2 mx-1 bg-gray-200 focus:outline-none block py-2 px-4 rounded-lg text-black"
-                        placeholder="Video veya müzik ara!" aria-describedby= "help" autocomplete= "off" autofocus required />
-                    <button class="w-32 p-2 mx-1 transition duration-300 focus:outline-none bg-purple-600 text-white font-bold tracking-wider rounded-lg hover:bg-purple-700">
-                        <i class="fa-solid fa-magnifying-glass text-lg"></i>
-                    </button>
-                </div>
-            </form>
-            <% related.slice(0,3).map(v => { %> 
-                <div onclick="location.href='/?watch=<%= v.id %>'" class="cursor-pointer">
-                    <card class="w-full flex flex-wrap items-center">
-                        <div class="relative rounded-2xlborder-4 border-gray-200 hover:border-[#ff90ff] dark:border-[#1f0418] dark:hover:border-[#6e266e] duration-500">
-                            <a>
-                                <img src="<%= v.thumbnails[v.thumbnails.length - 1].url %>" class="h-16 rounded-xl" />
-                            </a>
-                        </div>
-                        <div class="flex flex-row p-4 gap-2 opacity-80">
-                            <div clas="flex flex-col">
-                                <p class="capitalize text-md font-semibold">
-                                    <%= v.title.toLowerCase() %>
-                                </p>
-                                <a class="capitalize text-sm mt-2">
-                                    <i class="fa-brands fa-youtube text-red-600"></i> <%= v.author.name.toLowerCase() %> 
-                                </a>
+        <div class="grid grid-cols-1 gap-2 rounded-lg w-full">
+            <% related.slice(0,4).map(v=> { %>
+                <div onclick="location.href='/?watch=<%= v.id %>'"
+                    class="flex items-center justify-center rounded-lg cursor-pointer w-full">
+                    <div class="flex justify-center items-left w-full">
+                        <div class="bg-gray-200 dark:bg-gray-900 dark:bg-opacity-20 shadow-2xl rounded-xl w-full duration-500
+                                    border-4 border-gray-200 hover:border-[#ff90ff] dark:border-[#1f0418] dark:hover:border-[#6e266e]">
+                            <div class="flex">
+                                <div>
+                                    <img class="h-[80px] rounded-l-lg"
+                                        src="<%= v.thumbnails[v.thumbnails.length - 1].url %>" alt="<%= v.id %>">
+                                </div>
+                                <div class="p-2">
+                                    <div class="capitalize tracking-wide text-sm text-indigo-500 whitespace-normal">
+                                        <i class="fa-solid fa-music text-blue-600"></i> <%= v.title.toLowerCase() %>
+                                    </div>
+                                    <a class="capitalize block mt-1 text-sm leading-tight text-black dark:text-white">
+                                        <i class="fa-brands fa-youtube text-red-600"></i> <%= v.author.name.toLowerCase() %>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </card>
+                    </div>
                 </div>
-            <% }) %> 
+            <% }) %>
         </div>
     <% } %>
 </div>

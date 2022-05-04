@@ -13,26 +13,30 @@
         <div class="w-full">
             <div class='flex w-full bg-gray-200 dark:bg-gray-900 shadow-md rounded-lg overflow-hidden mx-auto'>
                 <div class="flex flex-col w-full">
-                    <div class="flex p-5 items-center">
-                        <img class='w-1/2 object-cover rounded-lg border-4 border-[#ff90ff] dark:border-[#6e266e]' src='<%= audio.thumbnail %>'>
-                        <div class="flex flex-col px-4 w-full">
-                            <span class="text-sm text-red-600 capitalize font-semibold pt-1">
-                                <%= audio.title %>
-                            </span>
-                            <a class="text-xs text-gray-500 uppercase font-medium" 
-                                href="https://www.youtube.com/channel/<%= audio.channelId %>"
-                                class="pt-2 text-lg leading-tight hover:text-blue-500 duration-500">
-                                <i class="fa-brands fa-youtube text-red-600"></i>
-                                <%= audio.author %>
-                            </a>
-                            <a class="text-xs text-gray-500 uppercase font-medium" >
-                                <i class="fa-solid fa-calendar-arrow-up"></i>
-                                <%= audio.publishDate %>
-                            </a>
-                            <a class="text-xs text-gray-500 uppercase font-medium" >
-                                <i class="fa-solid fa-eye"></i>
-                                <%= audio.viewCount %>
-                            </a>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 p-4">
+                        <div>
+                            <img class='object-cover rounded-lg border-4 border-[#ff90ff] dark:border-[#6e266e]' src='<%= audio.thumbnail %>'>
+                        </div>
+                        <div>
+                            <div class="flex flex-col px-4 w-full">
+                                <span class="text-sm text-red-600 capitalize font-semibold pt-1">
+                                    <%= audio.title %>
+                                </span>
+                                <a class="text-xs text-gray-500 uppercase font-medium" 
+                                    href="https://www.youtube.com/channel/<%= audio.channelId %>"
+                                    class="pt-2 text-lg leading-tight hover:text-blue-500 duration-500">
+                                    <i class="fa-brands fa-youtube text-red-600"></i>
+                                    <%= audio.author %>
+                                </a>
+                                <a class="text-xs text-gray-500 uppercase font-medium" >
+                                    <i class="fa-solid fa-calendar-arrow-up"></i>
+                                    <%= audio.publishDate %>
+                                </a>
+                                <a class="text-xs text-gray-500 uppercase font-medium" >
+                                    <i class="fa-solid fa-eye"></i>
+                                    <%= audio.viewCount %>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -89,6 +93,7 @@
                         <div class="relative w-full pr-4 lg:-mr-0">
                             <div class="bg-red-300 dark:bg-gray-800 h-2 w-full rounded-lg"></div>
                             <div id="player-progressbar" class="bg-red-600 h-2 rounded-lg absolute top-0"></div>
+                            <!-- <div id="inputt" class="w-full range"></div> -->
                         </div>
                         <div class="flex justify-center pt-2">
                             <span id="player-currenttime" class="text-xs dark:text-gray-500 text-gray-700 uppercase font-medium pl-2"></span>
@@ -110,10 +115,16 @@
             let player_currenttime = document.getElementById("player-currenttime")
             let player_totaltime = document.getElementById("player-totaltime")
             let player_progressbar = document.getElementById("player-progressbar")
+            let inputt = document.getElementById("inputt")
 
             $("#volume-bar").on("change input", function () {
                 var vid  =  $("#audio")[0];
                 vid.volume = $(this).val();
+            });
+
+            $("#inputtt").on("change input", function () {
+                var vid  =  $("#audio")[0];
+                vid.currentTime = $(this).val();
             });
 
             try {
@@ -130,7 +141,7 @@
                     audio.currentTime += 5
                 }
             }
-
+            
             function audio_player() {
                 if (audio.paused) {
                     localStorage.audio = 'playing'
@@ -151,18 +162,23 @@
 
             audio.ontimeupdate = function() { 
                 currentTime() 
+            };
+
+            audio.ontimeupdate = function() { 
                 progressBar()
             };
+            
+            function progressBar() {
+                let totalseconds = `<%= audio.lengthSeconds %>`
+                let seconds = parseInt(Math.floor(audio.currentTime))
+                player_progressbar.style.width = `${(seconds / totalseconds) * 100 < 1 ? "1" : (seconds / totalseconds) * 100}%`
+                inputt.innerHTML = `<input type="range" class="w-full" id="inputtt" min="0" max="${totalseconds}" step="0.1" value="${seconds}">`
+            }
 
             audio.onended = function() { 
                 localStorage.audio = 'finished'
             };
 
-            function progressBar() {
-                let totalseconds = `<%= audio.lengthSeconds %>`
-                let seconds = parseInt(Math.floor(audio.currentTime))
-                player_progressbar.style.width = `${(seconds / totalseconds) * 100 < 1 ? "1" : (seconds / totalseconds) * 100}%`
-            }
 
             function currentTime() {
                 let seconds = parseInt(Math.floor(audio.currentTime))

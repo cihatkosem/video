@@ -1,6 +1,6 @@
 <form>
     <div class="flex pt-4 px-4 w-full">
-        <input id="videoname" name="search" type="text"
+        <input id="videoname" name="search" type="text" value="<%= search %>"
             class="grow p-2 mx-1 bg-gray-200 focus:outline-none text-black block py-2 px-4 rounded-lg"
             placeholder="Video veya müzik ara!" aria-describedby= "help" autocomplete= "off" autofocus required />
         <button type="submit"
@@ -11,9 +11,9 @@
 </form>
 
 <div class="flex items-center justify-center pt-4">
-    <div class="grid grid-cols-12 gap-2 gap-y-4 max-w-6xl">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 w-full">
         <% videos.slice(0,15).map(v => { %> 
-            <div onclick="location.href='/?watch=<%= v.videoId %>'" class="cursor-pointer col-span-12 sm:col-span-6 md:col-span-3">
+            <div onclick="location.href='/?watch=<%= v.videoId %>'" class="cursor-pointer">
                 <card class="w-full flex flex-col">
                     <div class="relative rounded-2xl bg-black border-4 border-gray-200 hover:border-[#ff90ff] dark:border-[#1f0418] dark:hover:border-[#6e266e] duration-500">
                         <a>

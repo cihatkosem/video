@@ -17,14 +17,13 @@ module.exports = async function index(req, res, next) {
             mp3 = formats ? formats.filter(f => f.container == "webm" && f.mimeType == `audio/webm; codecs="opus"`) : null
 
         let details = findvideo.player_response
-        let publishDate = await Functions.day(true, false, details.microformat.playerMicroformatRenderer.publishDate)
 
         let video = {
             title: details.videoDetails.title,
             thumbnail: findvideo.videoDetails.thumbnails.reverse()[0].url,
             videoId: details.videoDetails.videoId,
             channelId: details.videoDetails.channelId,
-            publishDate: publishDate.slice(0, publishDate.search("00.00.00")),
+            publishDate: await Functions.day("true", "false", details.microformat.playerMicroformatRenderer.publishDate),
             viewCount: details.videoDetails.viewCount,
             category: details.videoDetails.category,
             lengthSeconds: details.videoDetails.lengthSeconds,
