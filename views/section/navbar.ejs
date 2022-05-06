@@ -14,20 +14,27 @@
             </button>
         </div>
         <div>
+        <button onclick="typefunc()" class="text-gray-800 ml-4 transition-colors mr-2">
             <% if (audio) { %>
-                <button onclick="location.href='/?watch=<%= audio.videoId %>'" class="text-gray-800 ml-4 transition-colors mr-2">
-                    <span>
-                        <i class="fa-solid fa-video text-xl text-white hover:text-red-600 duration-500"></i>
-                    </span>
-                </button>
+                <span>
+                    <i class="fa-solid fa-video text-xl text-white hover:text-red-600 duration-500"></i>
+                </span>
             <% } %>
             <% if (video) { %>
-                <button onclick="location.href='/?listen=<%= video.videoId %>'" class="text-gray-800 ml-4 transition-colors mr-2">
-                    <span>
-                        <i class="fa-solid fa-music fa-solid fa-moon text-xl text-blue-500 hover:text-blue-700 duration-500"></i>
-                    </span>
-                </button>
+                <span>
+                    <i class="fa-solid fa-music fa-solid fa-moon text-xl text-blue-500 hover:text-blue-700 duration-500"></i>
+                </span>
             <% } %>
+        </button>
+        <% let audio_id = audio ? audio.videoId ? audio.videoId : null : null %>
+        <% let video_id = video ? video.videoId ? video.videoId : null : null %>
+        <script>
+            function typefunc () {
+                let _id = `<%= audio_id ? audio_id : video_id ? video_id : null %>`
+                localStorage.type = `<%= audio_id %>` ? "video" : `<%= video_id %>` ? "audio" : null
+                location.href=`/?watch=${_id}`
+            }
+        </script>
         </div>
     </div>
     <div class="flex flex-wrap transition ease-in-out duration-500">

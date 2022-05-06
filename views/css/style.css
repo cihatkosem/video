@@ -496,6 +496,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   z-index: 10;
 }
 
+.float-right {
+  float: right;
+}
+
 .m-1 {
   margin: 0.25rem;
 }
@@ -617,6 +621,26 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-16 {
   width: 4rem;
+}
+
+.w-1\/2 {
+  width: 50%;
+}
+
+.w-\[95\%\] {
+  width: 95%;
+}
+
+.w-1\/4 {
+  width: 25%;
+}
+
+.w-44 {
+  width: 11rem;
+}
+
+.flex-auto {
+  flex: 1 1 auto;
 }
 
 .grow {
@@ -744,6 +768,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-gray-200 {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
+}
+
+.border-red-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity));
 }
 
 .bg-white {
@@ -1105,6 +1134,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.hover\:w-32:hover {
+  width: 8rem;
+}
+
 .hover\:border-\[\#ff90ff\]:hover {
   --tw-border-opacity: 1;
   border-color: rgb(255 144 255 / var(--tw-border-opacity));
@@ -1151,6 +1184,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .group:hover .group-hover\:hidden {
   display: none;
+}
+
+.group:hover .group-hover\:w-40 {
+  width: 10rem;
+}
+
+.group:hover .group-hover\:w-32 {
+  width: 8rem;
+}
+
+.group:hover .group-hover\:duration-500 {
+  transition-duration: 500ms;
 }
 
 .dark .dark\:inline {

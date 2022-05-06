@@ -52,6 +52,9 @@
 </div>
 
 <script>
+    let typeID = `<%= video.videoId %>`
+    if (localStorage.type && localStorage.type == "audio") location.href = `/?listen=${typeID}`
+
     var tag = document.createElement('script')
     tag.src = "https://www.youtube.com/iframe_api"
 

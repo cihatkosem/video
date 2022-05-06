@@ -66,14 +66,14 @@
                                 </button>
                             </div>
                             <div class="flex space-x-3 p-2">
-                                <button class="text-red-500 text-xl group flex ">
-                                    <i class="fa-solid fa-volume pr-2"></i>
-                                    <div class="hidden group-hover:inline pt-1">
-                                        <div class="range">
-                                            <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
-                                        </div>
+                                <div class="flex justify-between items-center group duration-500">
+                                    <div class="pr-2 text-red-500 text-xl" id="iconVolume"></div>
+                                    <div class="relative w-32 hidden group-hover:inline group-hover:duration-500">
+                                        <div class="bg-red-300 dark:bg-gray-800 w-full rounded-lg" style="height: 10px"></div>
+                                        <div id="player-volumebar" class="bg-red-600 rounded-lg absolute top-0" style="height: 10px"></div>
+                                        <input class="volume-bar processbar absolute top-0 w-full" type="range" id="volume-bar" min="0" max="1" step="0.01">
                                     </div>
-                                </button>
+                                </div>
                             </div>
                             <div class="flex space-x-3 p-2">
                                 <button 
@@ -90,12 +90,12 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="relative w-full pr-4 lg:-mr-0">
-                            <div class="bg-red-300 dark:bg-gray-800 h-2 w-full rounded-lg"></div>
-                            <div id="player-progressbar" class="bg-red-600 h-2 rounded-lg absolute top-0"></div>
-                            <!-- <div id="inputt" class="w-full range"></div> -->
+                        <div class="relative w-full">
+                            <div class="bg-red-300 dark:bg-gray-800 w-full rounded-lg" style="height: 10px"></div>
+                            <div id="player-progressbar" class="bg-red-600 rounded-lg absolute top-0" style="height: 10px"></div>
+                            <input class="second-bar processbar absolute top-0 w-full" type="range" id="second-bar" min="0" step="1">
                         </div>
-                        <div class="flex justify-center pt-2">
+                        <div class="flex justify-between pt-2">
                             <span id="player-currenttime" class="text-xs dark:text-gray-500 text-gray-700 uppercase font-medium pl-2"></span>
                             <span id="player-totaltime" class="text-xs dark:text-gray-500 text-gray-700 uppercase font-medium pl-1"></span>
                         </div>
@@ -103,82 +103,98 @@
                 </div>
             </div>
         </div>
-        <audio id="audio" class="w-0 h-0 absolute opacity-0" controls autoplay>
+        <audio id="audio" class="w-0 h-0 absolute opacity-0" controls>
             <source src="<%= audio.formats.mp3 %>" type="audio/mpeg">
             Your browser does not support the audio tag.
         </audio>
 
         <script>
+            let typeID = `<%= audio.videoId %>`
+            if (localStorage.type == "video") location.href = `/?watch=${typeID}`
+
             let id = `<%= related ? related[0].id : null %>`
             let audio = document.getElementById("audio")
             let player_button = document.getElementById("player-button")
             let player_currenttime = document.getElementById("player-currenttime")
             let player_totaltime = document.getElementById("player-totaltime")
             let player_progressbar = document.getElementById("player-progressbar")
-            let inputt = document.getElementById("inputt")
+            let player_volumebar = document.getElementById("player-volumebar")
+            let volume_bar = document.getElementById("volume-bar")
+            let iconVolume = document.getElementById("iconVolume")
 
             $("#volume-bar").on("change input", function () {
-                var vid  =  $("#audio")[0];
-                vid.volume = $(this).val();
+                audio.volume = $(this).val()
+                volumeBar($(this).val())
             });
 
-            $("#inputtt").on("change input", function () {
-                var vid  =  $("#audio")[0];
-                vid.currentTime = $(this).val();
+            $("#second-bar").on("change input", function () {
+                audio.currentTime = $(this).val();
             });
 
             try {
                 audio_player()
+                volumeBar(localStorage.volume)
             } catch (err) {
                 setTimeout(() => audio_player(), 3000);
             }
 
             function audio_forward(params) {
-                if (params == 'left') {
-                    audio.currentTime -= 5
-                }
-                if (params == 'right') {
-                    audio.currentTime += 5
-                }
+                if (params == 'left') audio.currentTime -= 5
+                if (params == 'right') audio.currentTime += 5
             }
             
             function audio_player() {
                 if (audio.paused) {
                     localStorage.audio = 'playing'
+                    audio.volume = localStorage.volume ? localStorage.volume : 1
+                    volume_bar.value = localStorage.volume ? localStorage.volume : 1
                     player_button.innerHTML = ` <i class="fa-solid fa-circle-pause"></i>`
                     audio.play()
                 } else {
                     localStorage.audio = 'paused'
+                    audio.volume = localStorage.volume ? localStorage.volume : 1
+                    volume_bar.value = localStorage.volume ? localStorage.volume : 1
                     player_button.innerHTML = ` <i class="fa-solid fa-circle-play"></i>`
                     audio.pause()
                 }
             }
 
             setInterval(() => {
-                if (localStorage.audio == 'finished') {
-                    location.href = `/?listen=${id}`
-                }
+                if (localStorage.audio && localStorage.audio == 'finished') location.href = `/?listen=${id}`
             }, 3000);
 
-            audio.ontimeupdate = function() { 
-                currentTime() 
-            };
-
-            audio.ontimeupdate = function() { 
-                progressBar()
+            audio.ontimeupdate = function () { 
+                currentTime()
+                progressBar1()
+                progressBar2()
             };
             
-            function progressBar() {
+            function progressBar1() {
+                let second_bar = document.getElementById("second-bar")
+                let seconds = parseInt(Math.floor(audio.currentTime))
+                second_bar.max = `<%= audio.lengthSeconds %>`
+                second_bar.value = seconds
+            }
+
+            function progressBar2() {
                 let totalseconds = `<%= audio.lengthSeconds %>`
                 let seconds = parseInt(Math.floor(audio.currentTime))
                 player_progressbar.style.width = `${(seconds / totalseconds) * 100 < 1 ? "1" : (seconds / totalseconds) * 100}%`
-                inputt.innerHTML = `<input type="range" class="w-full" id="inputtt" min="0" max="${totalseconds}" step="0.1" value="${seconds}">`
+            }
+
+            function volumeBar(value) {
+                localStorage.volume = value
+                player_volumebar.style.width = `${value * 100}%`
+                if (value * 100 == 0) iconVolume.innerHTML = `<i class="fa-solid fa-volume-slash"></i>`
+                else if (value * 100 > 0 && value * 100 <= 25) iconVolume.innerHTML = `<i class="fa-solid fa-volume-off"></i>`
+                else if (value * 100 > 25 && value * 100 <= 50) iconVolume.innerHTML = `<i class="fa-solid fa-volume-low"></i>`
+                else if (value * 100 > 50 && value * 100 <= 75) iconVolume.innerHTML = `<i class="fa-solid fa-volume"></i>`
+                else if (value * 100 > 75 && value * 100 <= 100) iconVolume.innerHTML = `<i class="fa-solid fa-volume-high"></i>`
             }
 
             audio.onended = function() { 
                 localStorage.audio = 'finished'
             };
-
 
             function currentTime() {
                 let seconds = parseInt(Math.floor(audio.currentTime))
@@ -186,10 +202,8 @@
                 seconds -= minutes * 60
                 const hours = parseInt(minutes / 60)
                 minutes -= hours * 60
-
-                if (hours === 0) 
-                    return player_currenttime.innerHTML = `${minutes}:${String(seconds % 60).padStart(2, 0)}`
-                return player_currenttime.innerHTML = `${String(hours).padStart(2, 0)}:${minutes}:${String(seconds % 60).padStart(2, 0)}`
+                let currenttime = hours === 0 ? `${minutes}:${String(seconds % 60).padStart(2, 0)}` : `${String(hours).padStart(2, 0)}:${minutes}:${String(seconds % 60).padStart(2, 0)}`
+                return player_currenttime.innerHTML = currenttime
             }
 
             let totalseconds = `<%= audio.lengthSeconds %>`
